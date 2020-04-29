@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KudoCinema.Models.Movie>
+@{
+    ViewBag.Title = "Movie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+
+@Html.ActionLink("New Movie", "New", "Movie", new { @class = "btn btn-primary"})
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Movies</th>
+            <th>Genres</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+         {
+            <tr>
+                <td>
+                    @Html.ActionLink(@movie.Name, "Edit", "Movie", new { id = movie.Id}, null)
+                </td>
+                <td>@movie.Genre.Name</td>
+            </tr>
+          }
+    </tbody>
+</table>

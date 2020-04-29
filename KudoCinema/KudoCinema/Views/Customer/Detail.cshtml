@@ -1,0 +1,17 @@
+﻿@model KudoCinema.Models.Customer
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+    <li>Membership Type: @Model.MembershipType.Name</li>
+    @if(Model.Birthday != null)
+    {
+        <li>Birthday: @Model.Birthday.Value.Date.ToString("dd/MM/yyyy")</li>
+    }
+</ul>
+
+
