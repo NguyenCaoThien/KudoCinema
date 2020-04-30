@@ -16,5 +16,13 @@ namespace KudoCinema.Models
         public byte Discount { get; set; }
         public byte DurationInMonths { get; set; }
         public short SignUpFee { get; set; }
+
+        public enum MemberShipType_TypeCode
+        {
+            PaysAsYouGo = 1,
+            Monthly = 2,
+            Quaterly = 3,
+            Annual = 4
+        }
     }
 }

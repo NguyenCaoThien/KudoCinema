@@ -5,7 +5,7 @@
 }
 
 <h2>Customers</h2>
-@Html.ActionLink("New customer", "New", "Customer", new { @class = "btn btn-primary"})
+@Html.ActionLink("New customer", "New", new { Controller = "Customer" }, new { @class = "btn btn-primary" })
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -19,7 +19,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(@item.Name, "Edit", "Customer", new { id = item.Id}, null)
+                    @Html.ActionLink(@item.Name, "Edit", "Customer", new { id = item.Id }, null)
                 </td>
                 <td>@item.MembershipType.Name</td>
             </tr>
@@ -27,4 +27,3 @@
 
     </tbody>
 </table>
-

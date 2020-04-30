@@ -30,7 +30,8 @@ namespace KudoCinema.Controllers
 
                 var viewModel = new CustomerFormViewModel()
                 {
-                    MembershipTypes = membershipTypes
+                    MembershipTypes = membershipTypes,
+                    Customer = new Customer()
                 };
 
                 ViewBag.FormTitle = "Add new customer";
@@ -40,11 +41,23 @@ namespace KudoCinema.Controllers
 
         [Route("Customer/Save")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
             using(var context = new ApplicationDbContext())
             {
-                if(customer.Id == 0)
+                if (!ModelState.IsValid)
+                {
+                    var membershipTypes = context.MembershipTypes.ToList();
+                    var viewModel = new CustomerFormViewModel()
+                    {
+                        MembershipTypes = membershipTypes,
+                        Customer = customer
+                    };
+
+                    return View("CustomerForm", viewModel);
+                }
+                else if(customer.Id == 0)
                 {
                     context.Customers.Add(customer);
                 }

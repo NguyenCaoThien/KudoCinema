@@ -31,17 +31,31 @@ namespace KudoCinema.Controllers
 
                 var viewModel = new MovieFormViewModel()
                 {
-                    Genres = genres
+                    Genres = genres,
                 };
                 ViewBag.FormTitle = "Add new movie";
                 return View("MovieForm", viewModel);
             }
         }
 
+        [HttpPost]
+        [Route("Movie/Save")]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
             using(var context = new ApplicationDbContext())
             {
+                if (!ModelState.IsValid)
+                {
+                    var genres = context.Genres.ToList();
+                    var viewModel = new MovieFormViewModel()
+                    {
+                        Genres = genres
+                    };
+
+                    return View("MovieForm", viewModel);
+                }
+
                 if(movie.Id == 0)
                 {
                     context.Movies.Add(movie);
@@ -67,10 +81,9 @@ namespace KudoCinema.Controllers
                 var movie = context.Movies.Include(p => p.Genre).FirstOrDefault(p => p.Id == id);
                 var genres = context.Genres.ToList();
 
-                var viewModel = new MovieFormViewModel
+                var viewModel = new MovieFormViewModel(movie)
                 {
                     Genres = genres,
-                    Movie = movie
                 };
 
                 ViewBag.FormTitle = "Edit movie";
