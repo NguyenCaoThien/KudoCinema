@@ -16,9 +16,7 @@ namespace KudoCinema.Controllers
         {
             using (var context = new ApplicationDbContext())
             {
-                var customers = context.Customers.Include(p => p.MembershipType).ToList();
-
-                return View(customers);
+                return View();
             }
         }
 
