@@ -30,3 +30,7 @@ textarea {
 .input-validation-error{
     border: solid 1px red;
 }
+
+#customers_wrapper{
+    margin-top: 16px;
+}

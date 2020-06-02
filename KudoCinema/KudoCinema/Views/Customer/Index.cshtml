@@ -21,7 +21,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $("#customers").DataTable({            
+            var table = $("#customers").DataTable({            
                 "sAjaxDataProp": "data",
                 ajax: {
                     url: "/api/customer",
@@ -53,6 +53,7 @@
                             url: "/api/customer/" + button.attr("data-cusomer-id"),
                             method: "DELETE",
                             success: function (result) {
+                                table.row(button.parents("tr")).remove().draw();
                                 console.log("Delete successfully!");
                             }
                         })
