@@ -16,7 +16,11 @@ namespace KudoCinema.Controllers
         {
             using (var context = new ApplicationDbContext())
             {
-                return View();
+                if (User.IsInRole(RoleName.Admin))
+                {
+                    return View("List");
+                }
+                return View("ReadOnlyList");
             }
         }
 
